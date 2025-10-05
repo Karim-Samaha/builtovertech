@@ -1,5 +1,4 @@
 "use client";
-import { schema } from "./types/table_schema";
 import { flexRender } from "@tanstack/react-table";
 import {
   Table,
@@ -10,13 +9,16 @@ import {
   TableRow,
 } from "@/shared/ui/Table";
 import { DataTableToolbar } from "./components/DataTableToolbar";
-import { MockData } from "../../../dummyData";
 import { useTable } from "./hooks/useTable";
 import { useMemo } from "react";
-
-function DaynmicTable() {
+import { TableSchema } from "./types/types";
+interface DaynmicTableProps {
+  data: object[];
+  schema: TableSchema;
+}
+function DaynmicTable({ data, schema }: DaynmicTableProps) {
   const { table, columns, tableActionProps } = useTable({
-    data: MockData,
+    data,
     schema,
   });
   const headerGroups = useMemo(
@@ -69,14 +71,13 @@ function DaynmicTable() {
                       cell.column.columnDef.cell,
                       cell.getContext()
                     );
-                    
+
                     return (
                       <TableCell
                         key={cell.id}
                         style={{ width: cell.column.getSize() }}
                       >
                         {cellValue ?? "N/A"}
-
                       </TableCell>
                     );
                   })}
