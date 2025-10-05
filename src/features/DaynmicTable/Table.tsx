@@ -60,21 +60,26 @@ function DaynmicTable() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className={`border-0 h-[60px]    ${
+                  className={`border-0 h-[60px] ${
                     i % 2 === 0 ? "bg-white" : "bg-[#F5F7F8]"
-                  }    hover:bg-gray-200 transition-colors `}
+                  } hover:bg-gray-200 transition-colors`}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      style={{ width: cell.column.getSize() }}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const cellValue = flexRender(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    );
+                    
+                    return (
+                      <TableCell
+                        key={cell.id}
+                        style={{ width: cell.column.getSize() }}
+                      >
+                        {cellValue ?? "N/A"}
+
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               ))
             ) : (

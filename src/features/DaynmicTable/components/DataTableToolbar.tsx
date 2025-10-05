@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/ui/select";
-import { Plus, Search, XIcon, Menu, Settings } from "lucide-react";
+import { Plus, Search, XIcon, Menu, Settings, AppWindow } from "lucide-react";
 import { useEffect } from "react";
 import { TableSchema } from "../types/types";
 import { Table } from "@tanstack/react-table";
@@ -47,14 +47,14 @@ export const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   }, [searchField, searchValue]);
 
   return (
-    <div className="flex items-center py-4 space-x-4">
-      <Button className="bg-[#03045E]">
+    <div className="flex items-center py-4 space-x-4 flex-wrap lg:flex-nowrap justify-center lg:justify-start">
+      <Button className="hidden lg:flex bg-[#03045E]">
         <Plus />
         <span>Add</span>
       </Button>
-      <div className="flex items-center w-[60%]  rounded-md border border-input focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 overflow-hidden">
+      <div className="flex items-center w-[100%] lg:w-[60%] rounded-md border border-input focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 overflow-hidden">
         <Select value={searchField} onValueChange={handleSearchField}>
-          <SelectTrigger className="w-[140px] border-none focus:ring-0 focus:ring-offset-0 text-sm bg-muted/40 rounded-none">
+          <SelectTrigger className="w-[90px] lg:w-[140px]  border-none focus:ring-0 focus:ring-offset-0 text-sm bg-muted/40 rounded-none">
             <SelectValue placeholder="Field" />
           </SelectTrigger>
           <SelectContent>
@@ -83,7 +83,7 @@ export const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
         value={grouping[0] ?? ""}
         onValueChange={(value) => handleGroup(value ? [value] : [])}
       >
-        <div className="relative w-[180px]">
+        <div className="relative w-[180px] hidden lg:flex">
           <SelectTrigger className="w-full text-sm pr-8">
             <SelectValue placeholder="Group by..." />
           </SelectTrigger>
@@ -111,9 +111,9 @@ export const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
             ))}
         </SelectContent>
       </Select>
-      <div className="ml-auto flex gap-x-2">
+      <div className="ml-auto flex gap-x-2 mt-2 lg:mt-0">
         <Pagination table={table} />
-        <Button variant="outline" className="bg-[#F5F7F8] cursor-pointer">
+        <Button variant="outline" className="bg-[#F5F7F8] cursor-pointer hidden lg:flex">
           <Settings color="#00B4D8" />
         </Button>
         <DropdownMenu>
@@ -123,6 +123,7 @@ export const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
               className="ml-auto bg-[#F5F7F8] cursor-pointer"
             >
               <Menu />
+              <AppWindow color="#00B4D8" className="hidden lg:flex" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

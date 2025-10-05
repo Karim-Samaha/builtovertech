@@ -16,7 +16,7 @@ export const Pagination = ({ table }: { table: Table<object> }) => {
 
   return (
     <div className="flex items-center justify-end space-x-2">
-      <div className="flex items-center space-x-2 ">
+      <div className="items-center space-x-2 hidden lg:flex">
         <Select
           value={String(pageSize)}
           onValueChange={(value) => table.setPageSize(Number(value))}
@@ -39,7 +39,7 @@ export const Pagination = ({ table }: { table: Table<object> }) => {
         </Select>
       </div>
 
-      <div className="flex items-center space-x-2 border-1 border-[#E9E9E9] rounded-[6px]">
+      <div className="flex items-center space-x-2 border-1 border-[#E9E9E9] rounded-[6px] min-w-[120px]">
         <Button
           variant="outline"
           size="sm"
