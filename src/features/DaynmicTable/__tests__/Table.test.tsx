@@ -57,12 +57,12 @@ jest.mock("@/shared/ui/Table", () => ({
 
 describe("DaynmicTable component", () => {
   it("renders toolbar", () => {
-    render(<DaynmicTable />);
+    render(<DaynmicTable data={MockData} schema={schema} />);
     expect(screen.getByTestId("toolbar")).toBeInTheDocument();
   });
 
   it("renders table headers based on schema", () => {
-    render(<DaynmicTable />);
+    render(<DaynmicTable data={MockData} schema={schema} />);
     schema.all_columns.forEach((col) => {
       expect(screen.getAllByText(col.header)[0]).toBeInTheDocument();
     });
@@ -80,7 +80,7 @@ describe("DaynmicTable component", () => {
       tableActionProps: {},
     }));
 
-    render(<DaynmicTable />);
+    render(<DaynmicTable data={MockData} schema={schema} />);
     expect(screen.getByText("No results.")).toBeInTheDocument();
   });
 });
